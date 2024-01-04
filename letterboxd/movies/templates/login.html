@@ -16,6 +16,14 @@
         <input type="password" id="id_password" name="password" class="w-full p-2 border rounded-md" required>
       </div>
 
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }} text-red-500 mb-5"{% endif %}>{{ message }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
       <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">Login</button>
       <a href="{% url 'home' %}" type="submit" class="bg-red-500 px-4 py-2 rounded text-white hover:bg-red-800 transition duration-200">Cancel</a>
     </form>

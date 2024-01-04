@@ -19,15 +19,8 @@ def add_movie(request):
 
     return render(request, 'movies/add_movie.html', {'form': form})
 
+#
 
-class OptionalLoginView(LoginView):
-    template_name = 'login.html'
-
-    def form_valid(self, form):
-        return super().form_valid(form)
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)
     
 class CustomLogoutView(LogoutView):
     def get(self, request, *args, **kwargs):
@@ -65,3 +58,16 @@ class RegisterView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('login')
+    
+
+from django.contrib import messages
+#EL LOGIN YA FUNCIONA, NO TOCAR
+class OptionalLoginView(LoginView):
+    template_name = 'login.html'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.error(self.request, "Nombre o Contraseña icorrectos")
+        return super().form_invalid(form)
