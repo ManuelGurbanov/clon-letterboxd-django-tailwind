@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Movie
 from .forms import MovieForm
-
+from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
 
 def home(request):
@@ -37,6 +37,8 @@ def register(request):
             user = form.save()
             login(request, user)
             return redirect('home')
+        else:
+            print(form.errors)  # Debug print statement for form errors
     else:
         form = CustomUserCreationForm()
 
@@ -60,7 +62,6 @@ class RegisterView(CreateView):
         return reverse_lazy('login')
     
 
-from django.contrib import messages
 #EL LOGIN YA FUNCIONA, NO TOCAR
 class OptionalLoginView(LoginView):
     template_name = 'login.html'

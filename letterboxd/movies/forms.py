@@ -24,8 +24,9 @@ class CustomUserCreationForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_superuser = self.cleaned_data.get('is_superuser')
         user.is_staff = self.cleaned_data.get('is_staff')
-
         if commit:
-            user.save()
-
+            try:
+                user.save()
+            except IntegrityError as e:
+                print(f"IntegrityError: {e}")
         return user
