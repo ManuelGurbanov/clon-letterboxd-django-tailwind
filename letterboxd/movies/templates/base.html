@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Letterboxd{% endblock %}</title>
+    <title>{% block title %}Movies{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
 <body class="font-sans bg-gray-800">
@@ -36,7 +36,8 @@
               <button type="submit" class="text-white bg-red-500 px-4 py-2 rounded">Log Out</button>
             </form>
           {% else %}
-            <a href="{% url 'login' %}" class="text-white bg-green-500 px-4 py-2 rounded">Log+</a>
+            <a href="{% url 'login' %}" class="text-white bg-green-500 px-4 py-2 rounded">Login</a>
+            <a href="{% url 'register' %}" class="text-white bg-yellow-400 px-4 py-2 rounded">Register</a>
           {% endif %}
         </div>
     </nav>
