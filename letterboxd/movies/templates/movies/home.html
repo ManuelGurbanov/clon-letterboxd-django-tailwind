@@ -3,7 +3,14 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="mt-8">
-        <h1 class="text-3xl font-bold text-white">Letterboxd</h1>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8">
+        {% for movie in movies %}
+            <div class="relative">
+                <img src="{{ movie.imageUrl }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-lg transition-transform transform hover:scale-105">
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <p class="text-white font-bold text-lg">{{ movie.name }}</p>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

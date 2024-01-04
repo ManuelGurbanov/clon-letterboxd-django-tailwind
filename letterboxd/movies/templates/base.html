@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{%load static%}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,8 +7,39 @@
     <title>{% block title %}Letterboxd{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body class="font-sans bg-gray-700">
+<body class="font-sans bg-gray-800">
+    <nav class="bg-gray-900 p-4 flex justify-between items-center">
+        <div>
+            <img src="{% static 'logo.png' %}" alt="Logo" class="h-8">
+        </div>
     
+        <div class="flex items-center space-x-4 text-gray-400 font-bold">
+            <span class="uppercase">{{ user.username }}</span>
+            <svg class= "h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-lighthouse" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l2 3l2 15h-8l2 -15z" /><path d="M8 9l8 0" /><path d="M3 11l2 -2l-2 -2" /><path d="M21 11l-2 -2l2 -2" /></svg>
+            </svg>
+            <a href="#">Films</a>
+            <a href="#">Lists</a>
+            <a href="#">Members</a>
+            <a href="#">Journal</a>
+            <svg class="text-white h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+            </svg>
+            
+            {% if user.is_superuser %}
+                <a href="{% url 'add_movie' %}" class="text-white bg-green-500 px-4 py-2 rounded">Add Movie</a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="text-white bg-red-500 px-4 py-2 rounded">Log Out</button>
+            </form>
+          {% else %}
+            <a href="{% url 'login' %}" class="text-white bg-green-500 px-4 py-2 rounded">Log+</a>
+          {% endif %}
+        </div>
+    </nav>
 
     <div class="container mx-auto">
         {% block content %}{% endblock %}

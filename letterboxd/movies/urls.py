@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import home
+from django.contrib.auth.views import LoginView
+from .views import home, add_movie, OptionalLoginView
 
 app_name = 'movies'
 
 urlpatterns = [
-    path('', home, name='home'),
+    
 ]
