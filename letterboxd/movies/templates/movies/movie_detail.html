@@ -12,7 +12,7 @@
         <ul>
             {% for rating in ratings %}
                 {% if rating.user.username != user.username %} {% comment %} Para que no se muestre el rating del mismo usuario dos veces {% endcomment %}
-                    <li class="opacity-65">{{ rating.user.username }}: {{ rating.score }} stars</li>
+                    <li class="opacity-65 capitalize">{{ rating.user.username }}: {{ rating.score }} stars</li>
                 {%endif%}
             {% endfor %}
         </ul>
