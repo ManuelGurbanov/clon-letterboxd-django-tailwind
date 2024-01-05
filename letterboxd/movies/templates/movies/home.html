@@ -6,25 +6,12 @@
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
         {% for movie in movies %}
             <div class="relative">
-                <img src="{{ movie.imageUrl }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-lg transition-transform transform hover:scale-105">
-
-                <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity hover:filter flex items-center justify-center flex-col">
-
-                    <p class="text-white font-bold text-lg bg-gray-800 px-1 py-1 rounded-lg" >{{ movie.name }}</p>
-                    
-                    
-                    <form method="post" action="{% url 'rate_movie' movie.id %}" class="mt-2 text-white font-semibold flex items-center justify-center flex-col">
-                        {% csrf_token %}
-                        <label for="rating" class="">Your Rating:</label>
-                        <select name="rating" id="rating" class="text-black">
-                            {% for i in "12345" %}
-                            <option value="{{ i }}">{{ i }} stars</option>
-                            {% endfor %}
-                        </select>
-                        <button type="submit" class="bg-green-600 rounded px-1 py-1 mt-3">Submit Rating</button>
-                    </form>
-
-                </div>
+                <a href="{% url 'movie_detail' movie.id%}">
+                        <img src="{{ movie.imageUrl }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-lg transition-transform transform hover:scale-105">
+                    <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity hover:filter flex items-center justify-center flex-col">
+                        <p class="text-white font-bold text-lg bg-gray-800 px-1 py-1 rounded-lg" >{{ movie.name }}</p>
+                    </div>
+                </a>
             </div>
         {% endfor %}
     </div>
