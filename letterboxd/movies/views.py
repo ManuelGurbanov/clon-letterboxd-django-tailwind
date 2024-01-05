@@ -3,10 +3,19 @@ from .models import Movie
 from .forms import MovieForm
 from django.contrib import messages
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='login')
 def home(request):
     movies = Movie.objects.all()
-    return render(request, 'movies/home.html', {'movies': movies})
+    ratings = MovieRating.objects.filter(user=request.user)
+
+    context = {
+        'movies': movies,
+        'ratings': ratings,
+    }
+
+    return render(request, 'movies/home.html', context)
 
 def add_movie(request):
     if request.method == 'POST':
@@ -60,9 +69,11 @@ class RegisterView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('login')
-    
 
-#EL LOGIN YA FUNCIONA, NO TOCAR
+
+
+
+#Login
 class OptionalLoginView(LoginView):
     template_name = 'login.html'
 
@@ -72,3 +83,34 @@ class OptionalLoginView(LoginView):
     def form_invalid(self, form):
         messages.error(self.request, "Nombre o Contraseña icorrectos")
         return super().form_invalid(form)
+    
+
+#Puntuación de Películas
+from django.shortcuts import  get_object_or_404
+
+@login_required(login_url='login')  # Ensure users are authenticated
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    ratings = MovieRating.objects.filter(movie=movie)
+    user_rating = ratings.filter(user=request.user).first()
+
+    context = {
+        'movie': movie,
+        'ratings': ratings,
+        'user_rating': user_rating,
+    }
+
+    return render(request, 'movies/movie_detail.html', context)
+
+from .models import MovieRating
+@login_required(login_url='login')  # Ensure users are authenticated
+def rate_movie(request, movie_id):
+    movie = get_object_or_404(Movie, pk=movie_id)
+    score = int(request.POST['rating'])
+
+    # Create or update the rating
+    rating, created = MovieRating.objects.get_or_create(movie=movie, user=request.user)
+    rating.score = score
+    rating.save()
+
+    return redirect('movie_detail', movie_id=movie.id)

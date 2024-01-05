@@ -30,3 +30,5 @@ class CustomUserCreationForm(UserCreationForm):
             except IntegrityError as e:
                 print(f"IntegrityError: {e}")
         return user
+    
+

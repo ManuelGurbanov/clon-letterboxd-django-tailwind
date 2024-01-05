@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ movie.name }}{% endblock %}
+
+{% block content %}
+    <div class="flex-auto text-center text-white">
+        <img src="{{ movie.imageUrl }}" class="w-full h-56 object-cover mb-3" alt="{{ movie.name }}" >
+        <h1 class="font-bold text-3xl mb-3">{{ movie.name }}</h1>
+        <p class="font-light opacity-40">{{ movie.description }}</p>
+
+        <h2 class="text-white font-bold text-center mt-4 mb-2">User Ratings</h2>
+        <ul>
+            {% for rating in ratings %}
+                {% if rating.user.username != user.username %} {% comment %} Para que no se muestre el rating del mismo usuario dos veces {% endcomment %}
+                    <li class="opacity-65">{{ rating.user.username }}: {{ rating.score }} stars</li>
+                {%endif%}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <p class="text-white font-bold text-center">Your Rating: {{ user_rating.score }} stars</p>
+{% endblock %}
