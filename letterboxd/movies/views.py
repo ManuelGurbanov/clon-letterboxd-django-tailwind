@@ -7,12 +7,14 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='login')
 def home(request):
-    movies = Movie.objects.all()
+    order_by = request.GET.get('order_by', 'name')
+    movies = Movie.objects.all().order_by(order_by)
     ratings = MovieRating.objects.filter(user=request.user)
 
     context = {
         'movies': movies,
         'ratings': ratings,
+        'order_by': order_by,
     }
 
     return render(request, 'movies/home.html', context)
@@ -107,7 +109,6 @@ from .models import MovieRating
 def rate_movie(request, movie_id):
     movie = get_object_or_404(Movie, pk=movie_id)
     score = int(request.POST['rating'])
-
     # Create or update the rating
     rating, created = MovieRating.objects.get_or_create(movie=movie, user=request.user)
     rating.score = score

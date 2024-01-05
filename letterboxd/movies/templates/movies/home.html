@@ -3,6 +3,17 @@
 {% block title %}Movies{% endblock %}
 
 {% block content %}
+    <div class="flex justify-center mt-8">
+        <form method="get" class="text-white">
+            <label for="order_by" class="mr-2">Order by:</label>
+            <select name="order_by" id="order_by" class="text-black mr-2">
+                <option value="name" {% if order_by == 'name' %}selected{% endif %}>Title</option>
+                <option value="age" {% if order_by == 'age' %}selected{% endif %}>Release Year</option>
+            </select>
+            <button type="submit" class="bg-green-500 px-2 py-1 rounded">Sort</button>
+        </form>
+    </div>
+
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
         {% for movie in movies %}
             <div class="relative">

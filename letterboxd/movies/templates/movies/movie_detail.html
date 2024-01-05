@@ -22,7 +22,7 @@
             <label for="rating" class="">Your Rating:</label>
             <select name="rating" id="rating" class="text-black">
                 {% for i in "12345" %}
-                <option value="{{ i }}">{{ i }} stars</option>
+                <option value="{{ i }}">{{ i }}</option>
                 {% endfor %}
             </select>
             <button type="submit" class="bg-green-600 rounded px-1 py-1 mt-3">Submit Rating</button>

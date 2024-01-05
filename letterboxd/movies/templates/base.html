@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Movies{% endblock %}</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="icon" type="image/x-icon" href="{%static 'icon.png'%}">
 </head>
 
 <body class="font-sans bg-gray-800">
@@ -54,7 +55,7 @@
 
     <!-- Menu android -->
     <div id="mobile-menu" class="lg:hidden hidden bg-gray-900 p-4 space-y-2">
-        <span class="uppercase">{{ user.username }}</span>
+        <span class="uppercase text-white font-bold mr-6">{{ user.username }}</span>
         <a href="#" class="text-white font-normal mr-6">Films</a>
         <a href="#" class="text-white font-normal mr-6">Lists</a>
         <a href="#" class="text-white font-normal mr-6">Members</a>
