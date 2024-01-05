@@ -10,11 +10,13 @@ def home(request):
     order_by = request.GET.get('order_by', 'name')
     movies = Movie.objects.all().order_by(order_by)
     ratings = MovieRating.objects.filter(user=request.user)
+    director = Movie.director
 
     context = {
         'movies': movies,
         'ratings': ratings,
         'order_by': order_by,
+        'director': director,
     }
 
     return render(request, 'movies/home.html', context)

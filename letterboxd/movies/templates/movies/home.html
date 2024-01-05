@@ -14,13 +14,14 @@
         </form>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 mb-16">
         {% for movie in movies %}
             <div class="relative">
                 <a href="{% url 'movie_detail' movie.id%}">
-                        <img src="{{ movie.imageUrl }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-lg transition-transform transform hover:scale-105">
+                        <img src="{{ movie.imageUrl }}" alt="{{ movie.name }}" class="w-full h-48 object-cover rounded-lg">
                     <div class="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity hover:filter flex items-center justify-center flex-col">
                         <p class="text-white font-bold text-lg bg-gray-800 px-1 py-1 rounded-lg" >{{ movie.name }}</p>
+                        <p class="text-white font-medium text-sm bg-gray-900 px-1 py-1 rounded-lg">{{movie.director}}</p>
                     </div>
                 </a>
             </div>
