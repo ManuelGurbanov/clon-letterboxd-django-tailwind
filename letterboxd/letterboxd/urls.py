@@ -13,3 +13,8 @@ urlpatterns = [
     path('<int:movie_id>/', movie_detail, name='movie_detail'),
     path('<int:movie_id>/rate/', rate_movie, name='rate_movie'),
 ]
+
+from django.conf.urls.static import static
+from django.conf import settings
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

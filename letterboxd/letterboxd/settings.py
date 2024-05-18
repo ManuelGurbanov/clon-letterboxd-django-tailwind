@@ -26,8 +26,10 @@ SECRET_KEY = 'django-insecure-p0%b8fap4bljn7_cq9yq36ba!mgrz661^jc=n!k63$itv%*8yw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['vercel.app']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh','127.0.0.1','localhost']
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Application definition
 
@@ -77,8 +79,12 @@ WSGI_APPLICATION = 'letterboxd.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'FgtKhmhMKEPGBBAvoXYESfRSbQXBefHL',
+        'HOST': 'monorail.proxy.rlwy.net',
+        'PORT': '20709',
     }
 }
 
