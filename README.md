@@ -1,4 +1,4 @@
-# Mi Proyecto
+# Web App de Películas con Backend
 Proyecto realizado con Django y Tailwind CSS
 
 ## Requisitos previos
